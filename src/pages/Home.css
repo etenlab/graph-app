@@ -1,11 +1,42 @@
-.nodes {
+.inner {
   padding: 15px;
+  font-size: 13px;
+  background-color: var(--ion-background-color);
+}
+.label {
+  color: var(--ion-color-medium);
+}
+.input {
+  margin-top: 3px;
+  border: 2px solid var(--ion-color-light-tint);
+  border-radius: 10px;
+}
+.nodes {
   font-size: 12px;
 }
 .node {
   border: 2px solid var(--ion-color-light-tint);
   padding: 15px;
+  overflow-y: auto;
+  max-height: 153px;
 }
 .node + .node {
   margin-top: 10px;
+}
+.property-keys {
+  margin-top: 8px;
+}
+.property-key {
+  padding: 6px 10px;
+  border: 2px solid rgba(var(--ion-color-primary-rgb), 0.6);
+  border-radius: 10px;
+}
+.property-key + .property-key {
+  margin-top: 5px;
+}
+.property-values {
+  margin-left: 20px;
+}
+.property-value {
+  padding: 3px;
 }
