@@ -4,10 +4,12 @@ import {
   IonHeader,
   IonLabel,
   IonInput,
+  IonIcon,
 } from '@ionic/react';
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
+import { thumbsUp, thumbsDown } from 'ionicons/icons';
 
 import { Loader } from '../components/Loader';
 import './Home.css';
@@ -21,11 +23,15 @@ type Node = {
 
 type NodePropertyKey = {
   property_key: string;
+  upVotes: number;
+  downVotes: number;
   values: NodePropertyValue[];
 };
 
 type NodePropertyValue = {
   property_value: PropertyValue;
+  upVotes: number;
+  downVotes: number;
 };
 
 type PropertyValue = {
@@ -44,11 +50,15 @@ type Relationship = {
 
 type RelationshipPropertyKey = {
   property_key: string;
+  upVotes: number;
+  downVotes: number;
   values: RelationshipPropertyValue[];
 };
 
 type RelationshipPropertyValue = {
   property_value: PropertyValue;
+  upVotes: number;
+  downVotes: number;
 };
 
 const nodeFields = `
@@ -56,10 +66,14 @@ const nodeFields = `
   node_type
   propertyKeys {
     property_key
+    upVotes
+    downVotes
     values {
       property_value {
         value
       }
+      upVotes
+      downVotes
     }
   }
 `;
@@ -70,10 +84,14 @@ const relationshipFields = `
   to_node_id
   propertyKeys {
     property_key
+    upVotes
+    downVotes
     values {
       property_value {
         value
       }
+      upVotes
+      downVotes
     }
   }
   fromNode {
@@ -312,20 +330,46 @@ function Item({
       <div>{type}</div>
       {propertyKeys.length > 0 && (
         <div className="property-keys">
-          {propertyKeys.map(({ property_key, values }, index) => (
-            <div key={index} className="property-key">
-              <div>{property_key}</div>
-              <div className="property-values">
-                {values.map(({ property_value: { value } }, index) => (
-                  <div key={index} className="property-value">
-                    {value}
-                  </div>
-                ))}
+          {propertyKeys.map(
+            ({ property_key, upVotes, downVotes, values }, index) => (
+              <div key={index} className="property-key-block">
+                <div className="property-key-header">
+                  <Votes upVotes={upVotes} downVotes={downVotes} />
+                  <div className="property-key">{property_key}</div>
+                </div>
+                <div className="property-values">
+                  {values.map(
+                    (
+                      { property_value: { value }, upVotes, downVotes },
+                      index,
+                    ) => (
+                      <div key={index} className="property-value-block">
+                        <Votes upVotes={upVotes} downVotes={downVotes} />
+                        <div className="property-value">{value}</div>
+                      </div>
+                    ),
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ),
+          )}
         </div>
       )}
+    </div>
+  );
+}
+
+function Votes({ upVotes, downVotes }: { upVotes: number; downVotes: number }) {
+  return (
+    <div className="votes">
+      <div className="vote">
+        <IonIcon slot="thumbs-up" icon={thumbsUp} className="vote-icon" />
+        {upVotes}
+      </div>
+      <div className="vote">
+        <IonIcon slot="thumbs-down" icon={thumbsDown} className="vote-icon" />
+        {downVotes}
+      </div>
     </div>
   );
 }
