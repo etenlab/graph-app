@@ -1,0 +1,10 @@
+.inner {
+  padding: 15px;
+  font-size: 13px;
+  background-color: var(--ion-background-color);
+}
+.label {
+  color: var(--ion-color-medium);
+  margin-bottom: 4px;
+  display: inline-block;
+}

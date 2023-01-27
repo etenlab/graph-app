@@ -1,0 +1,17 @@
+.votes {
+  display: flex;
+  align-items: center;
+  opacity: 0.5;
+  margin-right: 10px;
+}
+.vote {
+  display: flex;
+  align-items: center;
+  min-width: 32px;
+}
+.vote +.vote {
+  margin-left: 8px;
+}
+.vote-icon {
+  margin-right: 5px;
+}

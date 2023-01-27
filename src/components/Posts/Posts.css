@@ -1,0 +1,10 @@
+.posts {
+  display: flex;
+  align-items: center;
+  opacity: 0.5;
+  margin-right: 10px;
+  min-width: 32px;
+}
+.post-icon {
+  margin-right: 5px;
+}
