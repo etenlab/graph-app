@@ -19,7 +19,7 @@ export function NodeDetails() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .post('http://localhost:3000/graphql', {
+      .post(process.env.REACT_APP_GRAPHQL_URL!, {
         query: buildNodeQuery(nodeId),
       })
       .then((response) => setNode(response.data.data.node))

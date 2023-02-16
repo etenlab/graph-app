@@ -30,7 +30,7 @@ export function SearchNode() {
     }
     setIsLoading(true);
     axios
-      .post('http://localhost:3000/graphql', {
+      .post(process.env.REACT_APP_GRAPHQL_URL!, {
         query: buildNodesBySearchQuery(search),
       })
       .then((response) => setNodes(response.data.data.nodesBySearch))
